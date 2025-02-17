@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 PGVERSION=17
 
 sudo apt-get update
