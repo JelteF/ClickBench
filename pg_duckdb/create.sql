@@ -114,4 +114,4 @@ select
     r['RefererHash'] AS RefererHash,
     r['URLHash'] AS URLHash,
     r['CLID'] AS CLID
-from read_parquet('/tmp/hits.parquet') r;
+from read_parquet('/tmp/hits_*.parquet') r;
