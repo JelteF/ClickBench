@@ -23,7 +23,7 @@ select
     r['OS'] AS OS,
     r['UserAgent'] AS UserAgent,
     r['URL']::text AS URL,
-    r['Referer'] AS Referer,
+    r['Referer']::text AS Referer,
     r['IsRefresh'] AS IsRefresh,
     r['RefererCategoryID'] AS RefererCategoryID,
     r['RefererRegionID'] AS RefererRegionID,
