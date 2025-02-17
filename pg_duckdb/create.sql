@@ -11,7 +11,7 @@ create view hits as
 select
     r['WatchID'] AS WatchID,
     r['JavaEnable'] AS JavaEnable,
-    r['Title'] AS Title,
+    r['Title']::text AS Title,
     r['GoodEvent'] AS GoodEvent,
     epoch_ms(r['EventTime'] * 1000)::timestamp AS EventTime,
     (DATE '1970-01-01' + (r['EventDate'] * interval '1 day'))::date AS EventDate,
