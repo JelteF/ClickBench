@@ -1,11 +1,20 @@
+-- This will be added to a future version of pg_duckdb
+CREATE FUNCTION epoch_ms(duckdb.unresolved_type) RETURNS timestamp
+    LANGUAGE plpgsql
+    AS $$
+    BEGIN
+        RAISE EXCEPTION 'SHOULD NOT ACTUALLY BE CALLED';
+    END;
+    $$;
+
 create view hits as
 select
     r['WatchID'] AS WatchID,
     r['JavaEnable'] AS JavaEnable,
     r['Title'] AS Title,
     r['GoodEvent'] AS GoodEvent,
-    r['EventTime'] AS EventTime,
-    r['EventDate'] AS EventDate,
+    epoch_ms(r['EventTime'] * 1000)::timestamp AS EventTime,
+    (DATE '1970-01-01' + (r['EventDate'] * interval '1 day'))::date AS EventDate,
     r['CounterID'] AS CounterID,
     r['ClientIP'] AS ClientIP,
     r['RegionID'] AS RegionID,
@@ -13,7 +22,7 @@ select
     r['CounterClass'] AS CounterClass,
     r['OS'] AS OS,
     r['UserAgent'] AS UserAgent,
-    r['URL'] AS URL,
+    r['URL']::text AS URL,
     r['Referer'] AS Referer,
     r['IsRefresh'] AS IsRefresh,
     r['RefererCategoryID'] AS RefererCategoryID,
