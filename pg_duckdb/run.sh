@@ -10,5 +10,5 @@ cat queries.sql | while read -r query; do
     (
         echo '\timing'
         yes "$query" | head -n $TRIES
-    ) | psql -t postgres://postgres:duckdb@localhost:5432/postgres | grep 'Time'
+    ) | psql -X -t postgres://postgres:duckdb@localhost:5432/postgres | grep 'Time'
 done
