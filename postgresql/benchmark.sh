@@ -18,7 +18,7 @@ chmod 777 ~ hits.tsv
 
 sudo -u postgres psql -t -c 'CREATE DATABASE test'
 sudo -u postgres psql test -t <create.sql
-sudo -u postgres psql test -t -c '\timing' -c "\\copy hits FROM 'hits.tsv' with freeze"
+sudo -u postgres psql test -t -c '\timing' -c "\\copy hits FROM 'hits.tsv'"
 
 sudo -u postgres psql test -t -c 'VACUUM ANALYZE hits'
 
