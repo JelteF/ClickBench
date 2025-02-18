@@ -6,8 +6,8 @@ set -ex
 #sudo apt-get install -y docker.io
 #sudo apt-get install -y postgresql-client
 
-seq 0 99 | xargs -P100 -I{} bash -c 'wget --no-verbose --continue https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_{}.parquet'
-sudo docker run -d --name pgduck -p 5432:5432 -e POSTGRES_PASSWORD=duckdb -v .:/tmp/ pgduckdb/pgduckdb:17-v0.3.1
+wget --no-verbose --continue https://datasets.clickhouse.com/hits_compatible/athena/hits.parquet
+sudo docker run -d --name pgduck -p 5432:5432 -e POSTGRES_PASSWORD=duckdb -v ./hits.parquet:/tmp/hits.parquet pgduckdb/pgduckdb:17-v0.3.1
 
 sleep 5
 psql postgres://postgres:duckdb@localhost:5432/postgres -f create.sql
