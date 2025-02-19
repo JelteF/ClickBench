@@ -24,9 +24,9 @@ export PGUSER=postgres
 psql <create.sql
 time split hits.tsv --verbose -n r/$(($(nproc) / 2)) --filter='psql -t -c "\\copy hits FROM STDIN"'
 
-time psql test -t <index.sql
+time psql -t <index.sql
 
-time psql test -t -c 'VACUUM ANALYZE hits'
+time psql -t -c 'VACUUM ANALYZE hits'
 
 ./run.sh 2>&1 | tee log.txt
 
