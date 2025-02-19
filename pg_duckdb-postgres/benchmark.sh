@@ -18,6 +18,9 @@ sudo docker run -d --name pgduck -p 5432:5432 -e POSTGRES_PASSWORD=duckdb -e PGD
 # Give postgres time to start running
 sleep 5
 
+export PGPASSWORD=duckdb
+export PGUSER=postgres
+
 psql <create.sql
 time split hits.tsv --verbose -n r/$(($(nproc) / 2)) --filter='psql -t -c "\\copy hits FROM STDIN"'
 
