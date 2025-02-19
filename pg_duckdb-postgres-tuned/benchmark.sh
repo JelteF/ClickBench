@@ -24,7 +24,7 @@ export PGUSER=postgres
 psql <create.sql
 time split hits.tsv --verbose -n r/$(($(nproc) / 2)) --filter='psql -t -c "\\copy hits FROM STDIN"'
 
-sudo -u postgres psql test -t -c 'CREATE EXTENSION pg_trgm;'
+psql -t -c 'CREATE EXTENSION pg_trgm;'
 time psql -t <index.sql
 
 time psql -t -c 'VACUUM ANALYZE hits'
