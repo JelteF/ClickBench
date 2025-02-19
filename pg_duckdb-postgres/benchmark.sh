@@ -10,7 +10,8 @@ set -ex
 mkdir -p pgdata
 chmod 777 pgdata
 
-wget --no-verbose --continue https://datasets.clickhouse.com/hits_compatible/athena/hits.parquet
+wget --no-verbose --continue 'https://datasets.clickhouse.com/hits_compatible/hits.tsv.gz'
+gzip -d hits.tsv.gz
 
 sudo docker run -d --name pgduck -p 5432:5432 -e POSTGRES_PASSWORD=duckdb -e PGDATA=/pgdata/data -v ./pgdata:/pgdata -v ./hits.parquet:/tmp/hits.parquet pgduckdb/pgduckdb:17-v0.3.1 -c duckdb.max_memory=10GB
 
