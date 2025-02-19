@@ -7,7 +7,7 @@ CREATE FUNCTION epoch_ms(duckdb.unresolved_type) RETURNS timestamp
     END;
     $$;
 
-CREATE table REPLACE_SCHEMA.hits AS
+CREATE table hits AS
 select
     r['WatchID'] AS WatchID,
     r['JavaEnable'] AS JavaEnable,
@@ -114,4 +114,4 @@ select
     r['RefererHash'] AS RefererHash,
     r['URLHash'] AS URLHash,
     r['CLID'] AS CLID
-from read_parquet('REPLACE_PARQUET_FILE') r;
+from read_parquet('/tmp/hits.parquet') r;
